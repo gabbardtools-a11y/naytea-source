@@ -1,0 +1,57 @@
+(security_headers) {
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Frame-Options "DENY"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+        X-XSS-Protection "1; mode=block"
+    }
+}
+
+iznaki.ru {
+    reverse_proxy localhost:3001
+    encode gzip zstd
+    import security_headers
+}
+www.iznaki.ru {
+    redir https://iznaki.ru{uri} permanent
+}
+
+xn--j1adte.xn--p1acf {
+    reverse_proxy localhost:3000
+    encode gzip zstd
+    import security_headers
+}
+www.xn--j1adte.xn--p1acf {
+    redir https://xn--j1adte.xn--p1acf{uri} permanent
+}
+
+naytea.ru {
+    # HTML responses: never cache (otherwise Cloudflare shows stale UI after deploys)
+    @html {
+        header Content-Type text/html*
+    }
+    handle @html {
+        header Cache-Control "no-cache, must-revalidate"
+        reverse_proxy localhost:3002
+    }
+    # Static assets (_next/static/*, images, fonts): cache aggressively
+    handle {
+        reverse_proxy localhost:3002
+    }
+    encode gzip zstd
+    import security_headers
+}
+www.naytea.ru {
+    redir https://naytea.ru{uri} permanent
+}
+
+seismos.ru {
+    reverse_proxy localhost:3004
+    encode gzip zstd
+    import security_headers
+}
+www.seismos.ru {
+    redir https://seismos.ru{uri} permanent
+}

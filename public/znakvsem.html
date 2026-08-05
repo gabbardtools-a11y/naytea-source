@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZnakVsem.ru — Проверка товарного знака онлайн</title>
+<meta name="description" content="Бесплатная проверка товарного знака по открытым реестрам Роспатента. Поиск по 1+ млн знаков за 2-3 секунды.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e27;
+    --fg: #e2e8f0;
+    --card: #111640;
+    --primary: #3b82f6;
+    --accent: #06b6d4;
+    --muted: #94a3b8;
+    --border: rgba(59, 130, 246, 0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    overflow-x: hidden;
+  }
+  .glow {
+    background: radial-gradient(circle at center, rgba(59,130,246,0.25) 0%, transparent 70%);
+    filter: blur(80px);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+  .tab-active {
+    background: var(--card);
+    color: var(--primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Hero glow background -->
+<div class="absolute top-0 left-1/4 w-96 h-96 glow pointer-events-none"></div>
+<div class="absolute bottom-0 right-1/4 w-96 h-96 glow pointer-events-none"></div>
+
+<!-- Header -->
+<header class="relative border-b border-slate-800 backdrop-blur bg-slate-950/60 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="https://naytea.ru" class="flex items-center gap-2.5">
+      <!-- NayTea logo (green teapot) -->
+      <div class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center overflow-hidden shadow-sm">
+        <img src="https://naytea.ru/teapot.svg" alt="NayTea" class="w-5 h-5">
+      </div>
+      <div>
+        <div class="font-bold text-white text-sm">NayTea.ru</div>
+        <div class="text-[11px] text-slate-400">проверка товарных знаков</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-6 text-sm">
+      <a href="#search" class="text-slate-300 hover:text-white transition-colors">Поиск</a>
+      <a href="#services" class="text-slate-300 hover:text-white transition-colors">Услуги</a>
+      <a href="#why" class="text-slate-300 hover:text-white transition-colors">Преимущества</a>
+      <a href="#contacts" class="text-slate-300 hover:text-white transition-colors">Контакты</a>
+    </nav>
+    <a href="tel:+79164964929" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+      +7 (916) 496-49-29
+    </a>
+  </div>
+</header>
+
+<!-- Hero + Search -->
+<section id="search" class="relative">
+  <div class="max-w-4xl mx-auto px-4 py-12 md:py-20 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs text-blue-400 mb-6 fade-in">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      Бесплатная проверка по 1+ млн знаков Роспатента
+    </div>
+    <h1 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight fade-in">
+      Проверка товарного знака<br>
+      <span class="gradient-text">онлайн за 2-3 секунды</span>
+    </h1>
+    <p class="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 fade-in">
+      Узнайте, свободно ли название для регистрации в Роспатенте.
+      Поиск по всем актуальным базам и реестрам ФИПС — бесплатно и без регистрации.
+    </p>
+
+    <!-- Embedded search form (iframe from NayTea.ru) -->
+    <div class="max-w-5xl mx-auto fade-in">
+      <div class="bg-slate-900/80 backdrop-blur rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
+        <iframe
+          src="https://naytea.ru/partners/search"
+          title="Поиск товарных знаков по реестрам Роспатента"
+          class="w-full"
+          style="height: 75vh; min-height: 600px; border: 0; display: block;"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allow="fullscreen"
+        ></iframe>
+      </div>
+      <p class="text-xs text-slate-500 mt-3 text-center">
+        Поиск работает через агрегатор <a href="https://naytea.ru" target="_blank" rel="noopener" class="text-blue-400 hover:underline">NayTea.ru</a> · данные из открытых реестров Роспатента (ФИПС)
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="max-w-6xl mx-auto px-4 py-16">
+  <div class="text-center mb-12">
+    <h2 class="text-2xl md:text-3xl font-bold mb-3">Услуги</h2>
+    <p class="text-slate-400 max-w-2xl mx-auto">Полный цикл работы с товарными знаками — от проверки до регистрации в Роспатенте</p>
+  </div>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="feature-card bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+      <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4">
+        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+      <h3 class="font-semibold text-lg mb-2">Проверка знака</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Бесплатный поиск по открытым реестрам Роспатента. Узнайте, свободно ли название, за 2-3 секунды.</p>
+      <div class="mt-4 text-blue-400 font-semibold">0 ₽</div>
+    </div>
+    <div class="feature-card bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+      <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4">
+        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+      </div>
+      <h3 class="font-semibold text-lg mb-2">Регистрация знака</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Полное сопровождение: подготовка заявки, подбор классов МКТУ, подача в ФИПС, ведение дела до получения свидетельства.</p>
+      <div class="mt-4 text-emerald-400 font-semibold">от 15 000 ₽</div>
+    </div>
+    <div class="feature-card bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+      <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <h3 class="font-semibold text-lg mb-2">Защита и оспаривание</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Защита ваших прав при нарушениях, оспаривание чужих знаков, подача возражений и отзывов в Палату по патентным спорам.</p>
+      <div class="mt-4 text-purple-400 font-semibold">от 25 000 ₽</div>
+    </div>
+  </div>
+</section>
+
+<!-- Why us -->
+<section id="why" class="bg-slate-950/50 border-y border-slate-800">
+  <div class="max-w-6xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl md:text-3xl font-bold mb-3">Почему мы</h2>
+      <p class="text-slate-400">Профессиональный подход к защите вашего бренда</p>
+    </div>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="text-center">
+        <div class="text-3xl font-bold gradient-text mb-2">10+</div>
+        <div class="text-sm text-slate-400">лет опыта в патентном праве</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold gradient-text mb-2">500+</div>
+        <div class="text-sm text-slate-400">успешно зарегистрированных знаков</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold gradient-text mb-2">98%</div>
+        <div class="text-sm text-slate-400">успешных регистраций с первого раза</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold gradient-text mb-2">24ч</div>
+        <div class="text-sm text-slate-400">срок первичной проверки</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="max-w-4xl mx-auto px-4 py-16 text-center">
+  <h2 class="text-2xl md:text-3xl font-bold mb-3">Готовы проверить свой бренд?</h2>
+  <p class="text-slate-400 mb-6">Бесплатно. Без регистрации. За 2-3 секунды.</p>
+  <a href="#search" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold text-base transition-colors">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+    Проверить товарный знак
+  </a>
+</section>
+
+<!-- Contacts -->
+<footer id="contacts" class="border-t border-slate-800 bg-slate-950/60">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <a href="https://naytea.ru" class="flex items-center gap-2.5 mb-4">
+          <div class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center overflow-hidden shadow-sm">
+            <img src="https://naytea.ru/teapot.svg" alt="NayTea" class="w-5 h-5">
+          </div>
+          <div>
+            <div class="font-bold text-white">NayTea.ru</div>
+            <div class="text-xs text-slate-400">проверка товарных знаков</div>
+          </div>
+        </a>
+        <p class="text-sm text-slate-400 leading-relaxed">Бесплатная онлайн-проверка товарных знаков по открытым реестрам Роспатента. Профессиональная помощь в регистрации от ООО «Патентные Технологии» — на рынке с 2011 года.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-3">Контакты</h4>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <a href="tel:+79164964929" class="hover:text-white transition-colors">+7 (916) 496-49-29</a>
+            <span class="text-slate-500 text-xs">·</span>
+            <a href="tel:+79859383872" class="hover:text-white transition-colors">+7 (985) 938-38-72</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <a href="mailto:info@ptn.su" class="hover:text-white transition-colors">info@ptn.su</a>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-slate-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Москва, м. «Бабушкинская»<br><span class="text-xs text-slate-500">Анадырский проезд, д. 31/1, оф. 31</span></span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-slate-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>
+              ООО «Патентные Технологии»<br>
+              <span class="text-xs text-slate-500">
+                ИНН 7716687757 · КПП 771601001<br>
+                ОГРН 1117746321296 · с 22.04.2011
+              </span>
+            </span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            <a href="https://check.tochka.com/company/326774600387723/" target="_blank" rel="noopener" class="hover:text-white transition-colors underline">Проверить реквизиты в Точке</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-3">Мессенджеры</h4>
+        <div class="flex gap-2">
+          <a href="https://wa.me/79164964929" target="_blank" rel="noopener" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-emerald-600 flex items-center justify-center transition-colors" title="WhatsApp">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="tel:+79164964929" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-colors" title="Позвонить">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </a>
+          <a href="mailto:info@ptn.su" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-orange-600 flex items-center justify-center transition-colors" title="Написать на email">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+      <div>© 2026 NayTea.ru · ООО «Патентные Технологии»</div>
+      <div>Поиск работает через <a href="https://naytea.ru" target="_blank" rel="noopener" class="text-blue-400 hover:underline">NayTea.ru</a> · Данные из открытых реестров Роспатента (ФИПС)</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Fade-in animation on scroll
+  const fadeIns = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeIns.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
