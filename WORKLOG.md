@@ -5,6 +5,53 @@
 
 ---
 
+## 2026-08-06
+
+---
+
+### [2026-08-06 00:00] Ная — DONE: Подготовка передачи Ная2
+
+**Задача:** Подготовить GitHub-репо + документацию + handoff-пакет для Ная2 (младшая модель 5.1).
+
+**Что сделано:**
+- Создан GitHub-репо `gabbardtools-a11y/naytea-source` (173 файла)
+- Загружен весь исходный код: Next.js + TypeScript + Tailwind + i18n + D1
+- Создана документация (10 файлов):
+  - `README.md` — обзор
+  - `HELLO-NAYA2.md` — приветствие
+  - `ARCHITECTURE.md` — структура проекта
+  - `DEPLOY.md` — деплой
+  - `I18N.md` — переводы
+  - `WORKLOG-PROTOCOL.md` — правила worklog
+  - `CURRENT-STATE.md` — текущее состояние
+  - `ACCESS.md` — доступы (пути, не секреты)
+  - `WORKLOG.md` — журнал
+  - `CHEATSHEET.md` — быстрая шпаргалка
+- Handoff-пакет загружен на VPS: `/var/www/shared/naya2-handoff/`
+- Создана папка `inbox/naya2/` для сообщений Ная2
+- Настроен `.gitignore` (исключает node_modules, .next, .env, scripts, download, secrets)
+
+**Структура синхронизации:**
+- GitHub = source of truth
+- VPS = боевая среда (deploy through git)
+- Worklog = координация между Ная и Ная2
+- Inbox = файлы между чатами
+
+**Правила:**
+- Перед работой: `git pull` + читать worklog
+- После работы: `git push` + запись в worklog
+- Деплой: через `scripts/deploy-vps.py`
+- Запрещено: править на VPS напрямую
+
+**Ссылки:**
+- GitHub: https://github.com/gabbardtools-a11y/naytea-source
+- Handoff на VPS: `/var/www/shared/naya2-handoff/`
+- Inbox Ная2: `/var/www/shared/inbox/naya2/`
+
+**Статус:** ✅ Завершено. Ная2 готова к старту.
+
+---
+
 ## 2026-07-28
 
 ---
