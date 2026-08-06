@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import {
   Phone, Mail, MapPin, Clock, User, Building2, FileText, Shield,
-  ExternalLink, ArrowLeft, Send, MessageCircle,
+  ExternalLink, ArrowLeft, Send, MessageCircle, BookOpen, ArrowRight,
 } from 'lucide-react'
 import { useLanguage } from '@/lib/i18n/useLanguage'
 
@@ -53,6 +53,11 @@ export default function ContactsPage() {
       whatsappBtn: 'Написать в WhatsApp',
       emailBtn: 'Написать на email',
       footerText: 'Контакты — ООО «Патентные Технологии»',
+      seeAlsoTitle: 'Смотрите также',
+      seeAlsoMktuTitle: 'МКТУ простыми словами',
+      seeAlsoMktuText: 'Что такое МКТУ, зачем подбирать классы для товарного знака, какие инструменты помогают и сколько платить Роспатенту. Справочник простым языком — без маркетинга.',
+      seeAlsoMktuBtn: 'Открыть справочник',
+      footerMktuLink: 'МКТУ простыми словами',
     },
     en: {
       backHome: '← Home',
@@ -96,6 +101,11 @@ export default function ContactsPage() {
       whatsappBtn: 'Message on WhatsApp',
       emailBtn: 'Send email',
       footerText: 'Contacts — Patent Technologies LLC',
+      seeAlsoTitle: 'See also',
+      seeAlsoMktuTitle: 'MKTU in plain words (in Russian)',
+      seeAlsoMktuText: 'What MKTU is, why classes are selected for a trademark, which tools help, and how much to pay Rospatent. Reference guide in plain Russian — no marketing.',
+      seeAlsoMktuBtn: 'Open guide',
+      footerMktuLink: 'MKTU guide (RU)',
     },
     zh: {
       backHome: '← 返回首页',
@@ -139,6 +149,11 @@ export default function ContactsPage() {
       whatsappBtn: '在 WhatsApp 联系',
       emailBtn: '发送邮件',
       footerText: '联系方式 —— 「专利技术」有限责任公司',
+      seeAlsoTitle: '相关内容',
+      seeAlsoMktuTitle: 'МКТУ 通俗讲解(俄文)',
+      seeAlsoMktuText: '什么是 МКТУ、为什么要为商标选择类别、有哪些辅助工具、以及向 Роспатент 缴纳多少费用。通俗易懂的俄文参考指南,无营销内容。',
+      seeAlsoMktuBtn: '打开指南',
+      footerMktuLink: 'МКТУ 指南(俄文)',
     },
   }
 
@@ -291,6 +306,33 @@ export default function ContactsPage() {
           </div>
         </div>
 
+        {/* ===== SEE ALSO: MKTU GUIDE ===== */}
+        <div className="bg-card rounded-2xl border border-border shadow-xl p-6 md:p-10 mb-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <h2 className="text-xl font-bold text-foreground">{c.seeAlsoTitle}</h2>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-center gap-5 p-5 rounded-xl bg-muted/40 border border-border">
+            <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="font-semibold text-foreground mb-1">{c.seeAlsoMktuTitle}</div>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.seeAlsoMktuText}</p>
+            </div>
+            <Link
+              href="/mktu"
+              className="shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary/80 text-primary-foreground text-sm font-semibold transition-colors"
+            >
+              {c.seeAlsoMktuBtn}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
         {/* ===== CTA ===== */}
         <div className="bg-gradient-to-br from-primary/10 to-cyan-500/10 rounded-2xl border border-border p-6 md:p-10 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
@@ -343,6 +385,8 @@ export default function ContactsPage() {
           <Link href="/" className="text-primary hover:underline font-medium">NayTea.ru</Link>
           {' · '}
           {c.footerText}
+          {' · '}
+          <Link href="/mktu" className="text-primary hover:underline">{c.footerMktuLink}</Link>
         </div>
       </footer>
     </div>
