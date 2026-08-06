@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ArrowLeft, ExternalLink, Info, Shield, Loader2 } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Info, Shield, Loader2, BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import Link from 'next/link'
@@ -35,6 +35,14 @@ export default function RospatentPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              href="/mktu"
+              className="text-xs text-slate-300 hover:text-white hover:bg-slate-800 px-2.5 py-1.5 rounded-md flex items-center gap-1.5 transition-colors"
+              title="МКТУ простыми словами — справочник"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">МКТУ</span>
+            </Link>
             <a
               href="https://searchplatform.rospatent.gov.ru/trademarks?source=tm"
               target="_blank"

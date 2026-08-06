@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowLeft, ExternalLink, Shield, AlertTriangle, Loader2, Globe } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Shield, AlertTriangle, Loader2, Globe, BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
@@ -34,14 +34,24 @@ export default function TmviewPage() {
               </div>
             </div>
           </div>
-          <a
-            href="https://www.tmdn.org/tmview/#/tmview"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors"
-          >
-            Открыть в новой вкладке <ExternalLink className="w-3 h-3" />
-          </a>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/mktu"
+              className="text-xs text-slate-300 hover:text-white hover:bg-slate-800 px-2.5 py-1.5 rounded-md flex items-center gap-1.5 transition-colors"
+              title="МКТУ простыми словами — справочник"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">МКТУ</span>
+            </Link>
+            <a
+              href="https://www.tmdn.org/tmview/#/tmview"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors"
+            >
+              Открыть в новой вкладке <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
         </div>
       </header>
 

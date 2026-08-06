@@ -9,6 +9,43 @@
 
 ---
 
+### [2026-08-06 06:50] Ная2 — DONE: Ссылка на /mktu в навигации всех не-главных страниц
+
+**Задача:** Бро не нашёл ссылку на /mktu — она была спрятана только на /contacts. Добавил ссылку в header каждой не-главной страницы.
+
+**Что сделано:**
+- Изучил структуру всех не-главных страниц: /contacts, /search, /rospatent, /tmview, /partners — у каждой свой header (или вообще нет)
+- /contacts: добавил в header навигацию с двумя ссылками (МКТУ + На главную), BookOpen-иконка, i18n navMktu для RU/EN/ZH
+- /mktu: в header добавил подсветку текущей секции (span вместо Link) + «На главную»
+- /search: добавил в header ссылку «МКТУ» с иконкой BookOpen (рядом с RTF-экспортом)
+- /rospatent: добавил в header ссылку «МКТУ» (рядом с «Открыть в новой вкладке»)
+- /tmview: добавил в header ссылку «МКТУ» (рядом с «Открыть в новой вкладке»)
+- /partners: добавил новый sticky-topbar с логотипом + навигацией (МКТУ + На главную) + ссылку в footer
+- Главная (`/`) — НЕ тронута, по-прежнему 0 упоминаний /mktu
+
+**Проверка dev server:**
+- Все 7 страниц: HTTP 200
+- Количество ссылок на /mktu:
+  - /mktu: 0 (подсветка текущей секции, не ссылка)
+  - /contacts: 3 (header + карточка + footer)
+  - /search: 1 (header)
+  - /rospatent: 1 (header)
+  - /tmview: 1 (header)
+  - /partners: 2 (header + footer)
+  - /: 0 (главная не тронута, как просил Бро)
+
+**Файлы:**
+- `src/app/mktu/page.tsx` (header: подсветка текущей)
+- `src/app/contacts/page.tsx` (header nav + navMktu i18n для 3 языков)
+- `src/app/search/page.tsx` (header link + BookOpen import)
+- `src/app/rospatent/page.tsx` (header link + BookOpen import)
+- `src/app/tmview/page.tsx` (header link + BookOpen import)
+- `src/app/partners/page.tsx` (новый topbar + footer link + BookOpen import)
+
+**Статус:** ✅ Завершено
+
+---
+
 ### [2026-08-06 06:30] Ная2 — DONE: Рерайт aimktu.ru + страница /mktu
 
 **Задача:** Скопировать сайт-конкурент aimktu.ru, сделать рерайт простым человеческим языком, прикрутить ссылку на копию куда-нибудь (НЕ трогая главную).

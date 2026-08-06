@@ -5,6 +5,7 @@ import {
   Search, Plus, X, Loader2, ArrowLeft, Download,
   Image as ImageIcon, Upload, Sparkles, ExternalLink,
   ShieldCheck, ShieldAlert, AlertTriangle, Sun, Moon,
+  BookOpen,
 } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -304,6 +305,14 @@ export default function FullSearchPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              href="/mktu"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              title="МКТУ простыми словами — справочник"
+            >
+              <BookOpen className="w-4 h-4" />
+              <span className="hidden md:inline">МКТУ</span>
+            </Link>
             <Button
               variant="outline"
               size="sm"

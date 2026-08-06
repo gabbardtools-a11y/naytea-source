@@ -7,7 +7,7 @@ import {
   Download, ExternalLink, Mail, MessageCircle, Sparkles, Zap,
   Building2, Scale, Megaphone, Calculator, Rocket, Code,
   Check, X, ChevronDown, TrendingUp, Users, Shield, Heart,
-  ArrowRight, FileText, Layers, Award, Briefcase, Hash,
+  ArrowRight, FileText, Layers, Award, Briefcase, Hash, BookOpen,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/lib/i18n/useLanguage'
@@ -84,6 +84,34 @@ export default function PartnersPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* ===== TOP BAR ===== */}
+      <header className="border-b border-border bg-popover/70 backdrop-blur-md sticky top-0 z-30">
+        <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center overflow-hidden">
+              <img src="/teapot.svg" alt="NayTea.ru" className="w-4 h-4" />
+            </div>
+            <span className="text-sm font-bold text-foreground">NayTea.ru</span>
+          </Link>
+          <nav className="flex items-center gap-1">
+            <Link
+              href="/mktu"
+              className="text-xs px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors inline-flex items-center gap-1.5"
+              title="МКТУ простыми словами — справочник"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">МКТУ</span>
+            </Link>
+            <Link
+              href="/"
+              className="text-xs px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+            >
+              ← На главную
+            </Link>
+          </nav>
+        </div>
+      </header>
+
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden border-b border-border">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
@@ -436,6 +464,8 @@ export default function PartnersPage() {
           <Link href="/" className="text-primary hover:underline font-medium">NayTea.ru</Link>
           {' · '}
           {pt('title', lang)}
+          {' · '}
+          <Link href="/mktu" className="text-primary hover:underline">МКТУ простыми словами</Link>
         </div>
       </footer>
     </div>

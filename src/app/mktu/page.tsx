@@ -18,16 +18,26 @@ export default function MktuPage() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
       <header className="border-b border-border bg-popover/70 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center overflow-hidden shadow-sm">
               <img src="/teapot.svg" alt="NayTea.ru" className="w-5 h-5" />
             </div>
             <span className="text-base font-bold text-foreground">NayTea.ru</span>
           </Link>
-          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            ← На главную
-          </Link>
+          <nav className="flex items-center gap-1 sm:gap-2">
+            <span className="text-sm px-3 py-1.5 rounded-md text-foreground bg-secondary/60 font-medium inline-flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">МКТУ простыми словами</span>
+              <span className="sm:hidden">МКТУ</span>
+            </span>
+            <Link
+              href="/"
+              className="text-sm px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+            >
+              ← На главную
+            </Link>
+          </nav>
         </div>
       </header>
 
