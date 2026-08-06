@@ -81,3 +81,9 @@ worklog.md
 .github/
 .zscripts/
 VPS_GUIDE.md
+
+# Local handoff package (downloaded from VPS, not source of truth)
+handoff-naya2/
+
+# Local-only docs (downloaded from VPS for convenience)
+naya2-handoff/

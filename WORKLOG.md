@@ -9,6 +9,49 @@
 
 ---
 
+### [2026-08-06 05:30] Ная2 — START: Инициализация окружения и доступов
+
+**Задача:** Получить от Бро доступы (GitHub токен, VPS), подключиться к VPS, забрать handoff-пакет, активировать CF_D1_TOKEN локально.
+
+**Что сделано:**
+- Сохранён GitHub токен в `~/.git-credentials` (chmod 600, не в git)
+- Сохранён VPS пароль в `~/.vps-password` (chmod 600, не в git)
+- Подключилась к VPS 188.127.227.250 через paramiko
+- Скачала handoff-пакет `/var/www/shared/naya2-handoff/` → `/home/z/my-project/handoff-naya2/` (10 файлов, включая `HELLO-NAYA2.md`)
+- Прочитала `HELLO-NAYA2.md` — приветствие от Наи (opus)
+- Проверила `/var/www/shared/secrets/api-keys.md` — там нет CF_D1_TOKEN (только RouterAI, ZAI, Yandex)
+- Нашла `CF_D1_TOKEN` в `/var/www/naytea/.env` на VPS
+- Добавила токен в локальный `.env` (он в `.gitignore`, в git не попадёт)
+- Перезапустила dev server — D1 API теперь работает
+
+**Проверка D1 (локально):**
+- `GET /api/rospatent/stats` → 200, total: 1 147 581 знаков
+- `POST /api/rospatent/search` (поиск «Apple») → 200, найдено 59 результатов
+- `POST /api/rospatent/by-number` (номер 100000) → 200, найден знак «Меридиан»
+- Все 4 источника теперь активны: D1, linkmark.ru, brand-search.ru, WIPO
+
+**Состояние VPS (на 2026-08-06):**
+- ✅ Все 6 PM2 процессов online: naytea, iznaki, mktu, seismos, aipat, strunino
+- ⚠️ Диск 72% (5.4 GB свободно из 20 GB) — не критично, но следить
+- ❌ Enrichment-скрипт НЕ запущен (нет процесса `enrich_vps.py`), прогресс-файлы `/tmp/enrich-prog-*` есть — возможно завершился или упал
+- 📨 В `inbox/naytea/` 2 старых сообщения от Наи (от 2026-07-18)
+
+**Доступы подтверждены:**
+- ✅ GitHub: 11 репо организации `gabbardtools-a11y` (через token)
+- ✅ VPS: SSH через paramiko работает
+- ✅ D1: CF_D1_TOKEN активен локально
+- ✅ Git: `git fetch` / `git pull` работают
+
+**Файлы:**
+- `scripts/vps-connect.py` — базовое подключение к VPS
+- `scripts/vps-fetch-handoff.py` — скачивание handoff-пакета
+- `scripts/vps-explore.py` — проверка состояния VPS
+- `handoff-naya2/HELLO-NAYA2.md` — приветствие от Наи (локальная копия)
+
+**Статус:** ✅ Готова к работе. Жду первую задачу от Бро или сообщение от Наи (opus) через `inbox/naya2/`.
+
+---
+
 ### [2026-08-06 00:00] Ная — DONE: Подготовка передачи Ная2
 
 **Задача:** Подготовить GitHub-репо + документацию + handoff-пакет для Ная2 (младшая модель 5.1).
