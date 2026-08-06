@@ -188,7 +188,8 @@ export default function ContactsPage() {
           <nav className="flex items-center gap-1 sm:gap-2">
             <Link
               href="/mktu"
-              className="text-sm px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors inline-flex items-center gap-1.5"
+              className="text-sm px-3 py-1.5 rounded-md text-primary hover:bg-primary/10 transition-colors inline-flex items-center gap-1.5 font-medium border border-primary/30"
+              title="МКТУ простыми словами — справочник"
             >
               <BookOpen className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{c.navMktu}</span>

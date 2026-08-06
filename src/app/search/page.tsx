@@ -307,11 +307,12 @@ export default function FullSearchPage() {
           <div className="flex items-center gap-2">
             <Link
               href="/mktu"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm text-primary hover:bg-primary/10 transition-colors border border-primary/30 font-medium"
               title="МКТУ простыми словами — справочник"
             >
               <BookOpen className="w-4 h-4" />
-              <span className="hidden md:inline">МКТУ</span>
+              <span className="hidden md:inline">МКТУ простыми словами</span>
+              <span className="md:hidden">МКТУ</span>
             </Link>
             <Button
               variant="outline"

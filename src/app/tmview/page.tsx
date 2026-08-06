@@ -37,11 +37,12 @@ export default function TmviewPage() {
           <div className="flex items-center gap-2">
             <Link
               href="/mktu"
-              className="text-xs text-slate-300 hover:text-white hover:bg-slate-800 px-2.5 py-1.5 rounded-md flex items-center gap-1.5 transition-colors"
+              className="text-xs text-cyan-400 hover:text-cyan-300 hover:bg-cyan-950/40 px-2.5 py-1.5 rounded-md flex items-center gap-1.5 transition-colors border border-cyan-800/60 font-medium"
               title="МКТУ простыми словами — справочник"
             >
               <BookOpen className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">МКТУ</span>
+              <span className="hidden sm:inline">МКТУ простыми словами</span>
+              <span className="sm:hidden">МКТУ</span>
             </Link>
             <a
               href="https://www.tmdn.org/tmview/#/tmview"

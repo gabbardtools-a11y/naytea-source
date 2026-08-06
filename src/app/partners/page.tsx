@@ -96,11 +96,12 @@ export default function PartnersPage() {
           <nav className="flex items-center gap-1">
             <Link
               href="/mktu"
-              className="text-xs px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors inline-flex items-center gap-1.5"
+              className="text-xs px-2.5 py-1.5 rounded-md text-primary hover:bg-primary/10 transition-colors inline-flex items-center gap-1.5 border border-primary/30 font-medium"
               title="МКТУ простыми словами — справочник"
             >
               <BookOpen className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">МКТУ</span>
+              <span className="hidden sm:inline">МКТУ простыми словами</span>
+              <span className="sm:hidden">МКТУ</span>
             </Link>
             <Link
               href="/"
